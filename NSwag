@@ -1,0 +1,8 @@
+AUTO GENERATE PROXY AFTER BUILD .NET CORE PROJECT
+- FOR C# Project
+  <Target Name="NSwag" AfterTargets="Build">
+    <Exec Command="$(NSwagExe_Net50) aspnetcore2openapi /assembly:$(TargetDir)Your_Project.dll /output:swagger.json" />
+    <Exec Command="$(NSwagExe) openapi2csclient /configurationClass:BackendConfig /className:Your_Prefix{controller}Your_Suffix /useHttpClientCreationMethod:true /namespace:Your_Namespace /useBaseUrl:false /injectHttpClient:false /generateSyncMethods:true /clientBaseClass:BaseProxy /input:swagger.json /output:Your_OutPut_Path/your_file.cs" />
+  </Target>
+  
+- FOR Angular Project
